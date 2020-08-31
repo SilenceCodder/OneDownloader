@@ -39,10 +39,11 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.skitetech.onedownloader"
-        minSdkVersion 16
+        minSdkVersion 18
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -60,4 +61,9 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.google.firebase:firebase-inappmessaging-display:18.0.1'
+
+    // Check that Firebase core is up-to-date:
+    implementation 'com.google.firebase:firebase-core:17.0.0'
 }
+apply plugin: 'com.google.gms.google-services'

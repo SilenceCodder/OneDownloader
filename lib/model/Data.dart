@@ -18,34 +18,34 @@ List<CategoryModel> getCategoryList() {
   List<CategoryModel> getCategory = [
     CategoryModel(
         image: AppImage.svg1,
-        name: 'Home',
-        color: AppColor.rimary,
-        webUrl: 'http://app.samicsub.com',
-        icon: Icons.home),
+        name: 'Facebook',
+        color: Colors.white,
+        iconColor: Colors.blue,
+        icon: FontAwesomeIcons.facebook),
     CategoryModel(
         image: AppImage.svg1,
-        name: 'Airtime',
-        color: AppColor.rimary,
-        webUrl: 'http://app.samicsub.com/user/airtime',
-        icon: FontAwesomeIcons.mobile),
+        name: 'WhatsApp Status',
+        color: Colors.white,
+        iconColor: Colors.green,
+        icon: FontAwesomeIcons.whatsapp),
     CategoryModel(
         image: AppImage.svg1,
-        name: 'Data',
-        color: AppColor.rimary,
-        webUrl: 'http://app.samicsub.com/user/data_bundle',
-        icon: FontAwesomeIcons.wifi),
-    CategoryModel(
+        name: 'Instagram',
+         color: Colors.white,
+        iconColor: Colors.red,
+        icon: FontAwesomeIcons.instagram),
+        CategoryModel(
         image: AppImage.svg1,
-        name: 'MTN CUG',
-        color: AppColor.rimary,
-        webUrl: 'http://app.samicsub.com/user/cug',
-        icon: Icons.new_releases),
-    CategoryModel(
+        name: 'TicTok',
+         color: Colors.white,
+        iconColor: Colors.red,
+        icon: FontAwesomeIcons.instagram),
+         CategoryModel(
         image: AppImage.svg1,
-        name: 'Recharge card',
-        webUrl: 'http://app.samicsub.com/user/recharge_cards',
-        color: AppColor.rimary,
-        icon: FontAwesomeIcons.lightbulb),
+        name: 'Twitter',
+         color: Colors.white,
+        iconColor: Colors.blue,
+        icon: FontAwesomeIcons.twitter),
   ];
   return getCategory;
 }
@@ -54,46 +54,34 @@ List<CategoryModel> getCategoryList2() {
   List<CategoryModel> getCategory2 = [
     CategoryModel(
         image: AppImage.svg1,
-        name: 'Profile',
-        color: AppColor.rimary,
-        webUrl: 'http://app.samicsub.com/user/profile',
-        icon: FontAwesomeIcons.user),
+        name: 'Twitter',
+         color: Colors.white,
+        iconColor: Colors.blue,
+        icon: FontAwesomeIcons.twitter),
     CategoryModel(
         image: AppImage.svg1,
-        name: 'Wallet',
-        color: AppColor.rimary,
-        webUrl: 'http://app.samicsub.com/user/wallet',
-        icon: FontAwesomeIcons.googleWallet),
+        name: 'Pinterest',
+        color: Colors.white,
+        iconColor: Colors.red,
+        icon: FontAwesomeIcons.pinterest,),
     CategoryModel(
         image: AppImage.svg1,
-        name: 'Own a website',
-        color: AppColor.rimary,
-        webUrl: 'http://app.samicsub.com/user/own-a-website',
-        icon: FontAwesomeIcons.intercom),
+        name: 'LinkedIn',
+         color: Colors.white,
+        iconColor: Colors.blue,
+        icon: FontAwesomeIcons.linkedin),
     CategoryModel(
         image: AppImage.svg1,
-        name: 'Become Marketer',
-        webUrl: 'http://app.samicsub.com/user/become-an-oline-marketer',
-        color: AppColor.rimary,
-        icon: FontAwesomeIcons.superpowers),
+        name: 'Likee',
+        color: Colors.white,
+        iconColor: Colors.red,
+        icon: FontAwesomeIcons.lowVision,),
     CategoryModel(
         image: AppImage.svg1,
-        name: 'Upgrade Plan',
-        webUrl: 'http://app.samicsub.com/user/upgrade-plan',
-        color: AppColor.rimary,
-        icon: Icons.trending_up),
-    CategoryModel(
-        image: AppImage.svg1,
-        name: 'All Transaction',
-        color: AppColor.rimary,
-        webUrl: 'http://app.samicsub.com/user/all-transactions',
-        icon: Icons.list),
-    CategoryModel(
-        image: AppImage.svg1,
-        name: 'Price List',
-        webUrl: 'http://app.samicsub.com/user/price-list',
-        color: AppColor.rimary,
-        icon: Icons.history),
+        name: 'Show more',
+         color: Colors.white,
+        iconColor: Colors.red,
+        icon: Icons.more),
   ];
   return getCategory2;
 }

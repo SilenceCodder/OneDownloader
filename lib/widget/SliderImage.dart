@@ -55,13 +55,13 @@ class SliderImage extends StatelessWidget {
                       itemBuilder: (BuildContext context, int index) {
                         return GestureDetector(
                           child: TopSwiperWidget(
-                            sliderModel: advertSnapshot.data.data,
+                            sliderModel: advertSnapshot.data.shops,
                             index: index,
                           ),
                           onTap: () {},
                         );
                       },
-                      itemCount: advertSnapshot.data.data.length,
+                      itemCount: advertSnapshot.data.shops.length,
                       pagination: new SwiperPagination(),
                     ),
                   ))),
@@ -72,7 +72,7 @@ class SliderImage extends StatelessWidget {
 }
 
 class TopSwiperWidget extends StatelessWidget {
-  final List<Data> sliderModel;
+  final List<Shops> sliderModel;
   final int index;
   final CustomFunction _customFunction = locator<CustomFunction>();
 

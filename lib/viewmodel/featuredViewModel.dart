@@ -1,6 +1,7 @@
-import 'package:onedownloader/viewmodel/base_model.dart';
 
-class FeaturedViewModel extends BaseModel {
+import 'package:stacked/stacked.dart';
+
+class FeaturedViewModel extends BaseViewModel {
   String url;
 
   initalize() {

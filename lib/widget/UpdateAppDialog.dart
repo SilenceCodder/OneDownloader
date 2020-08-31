@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:onedownloader/Styles/AppColor.dart';
 import 'package:onedownloader/Styles/AppTextStyle.dart';
 import 'package:onedownloader/viewmodel/DialogVieModel.dart';
-import 'package:provider_architecture/provider_architecture.dart';
+import 'package:stacked/stacked.dart';
 
 class UpdateAppDialog extends StatefulWidget {
   final String title, subtitile, buttonText;
@@ -21,8 +18,8 @@ class _UpdateAppDialogState extends State<UpdateAppDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelProvider<DialogVieModel>.withConsumer(
-        viewModelBuilder: () => DialogVieModel(),
+    return ViewModelBuilder<DialogVieModel>.reactive(
+      viewModelBuilder: () => DialogVieModel(),
         builder: (context, model, child) => Center(
               child: Dialog(
                 elevation: 0,

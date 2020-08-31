@@ -1,19 +1,19 @@
 import 'package:flutter/foundation.dart';
 
 class AdvertSliderModel with ChangeNotifier{
-  String status;
-  String message;
-  List<Data> data;
+ bool status;
+  String msg;
+  List<Shops> shops;
 
-  AdvertSliderModel({this.status, this.message, this.data});
+  AdvertSliderModel({this.status, this.msg, this.shops});
 
   AdvertSliderModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    message = json['message'];
-    if (json['data'] != null) {
-      data = new List<Data>();
-      json['data'].forEach((v) {
-        data.add(new Data.fromJson(v));
+    msg = json['msg'];
+    if (json['shops'] != null) {
+      shops = new List<Shops>();
+      json['shops'].forEach((v) {
+        shops.add(new Shops.fromJson(v));
       });
     }
   }
@@ -21,47 +21,38 @@ class AdvertSliderModel with ChangeNotifier{
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
-    data['message'] = this.message;
-    if (this.data != null) {
-      data['data'] = this.data.map((v) => v.toJson()).toList();
+    data['msg'] = this.msg;
+    if (this.shops != null) {
+      data['shops'] = this.shops.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class Data {
+class Shops {
   String id;
-  String vendorId;
   String name;
+  String rate;
   String location;
   String image;
-  String createdAt;
 
-  Data(
-      {this.id,
-      this.vendorId,
-      this.name,
-      this.location,
-      this.image,
-      this.createdAt});
+  Shops({this.id, this.name, this.rate, this.location, this.image});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Shops.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    vendorId = json['vendor_id'];
     name = json['name'];
+    rate = json['rate'];
     location = json['location'];
     image = json['image'];
-    createdAt = json['created_at'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['vendor_id'] = this.vendorId;
     data['name'] = this.name;
+    data['rate'] = this.rate;
     data['location'] = this.location;
     data['image'] = this.image;
-    data['created_at'] = this.createdAt;
     return data;
   }
 }

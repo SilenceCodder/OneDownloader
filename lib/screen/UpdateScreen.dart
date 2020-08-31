@@ -32,9 +32,11 @@ class _UpdateScreenState extends State<UpdateScreen> {
   //UPDATE DIALOG
   updateDialog(BuildContext context) {
     return showDialog(
+      barrierDismissible: true,
         context: context,
         builder: (BuildContext context) {
           return UpdateAppDialog(
+
               color: AppColor.rimary,
               title: 'Update',
               buttonText: 'OK',

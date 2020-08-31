@@ -5,19 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class AppColor {
-  static const Color rimary = Color(0xFFBAB100); //Color(0xFF076308); 
-  static const Color primaryDark = Color(0xFF012E07);
-  static Color bg = Colors.yellow.shade50;
-  static Color header = Color(0xFF5F5B00);
-  static Color assents = Color(0xFF469131);
-  static const Color primaryColor = const Color(0xFF6200EE);
-  static const Color secondaryColor = const Color(0xFF3700B3);
-  static const Color pageButtons = const Color(0xFF3700B3);
-  static const Color boardPageColor = const Color(0xF6F6F7FF);
-  static const Color secondaryLightColor = const Color(0xFFBB86FC);
-  static const Color a1 = const Color(0xFFffab00);
-  static const Color a2 = const Color(0xFFff6f00);
-  static const Color a3 = const Color(0xFFbf360c);
+  static const Color rimary = Color(0xFF0f4c75); //Color(0xFF076308); 
+  static const Color primaryDark = Color(0xFF0d47a1);
+  static Color primaryLight = Color(0xFF64b5f6);
+  static Color header = Color(0xFF0f4c75);
+  static Color assents = Color(0xFF2962ff);
+  static const Color primaryColor = const Color(0xFF336d88);
+  static const Color secondaryLightColor = const Color(0xFF810000);
 }
 
 

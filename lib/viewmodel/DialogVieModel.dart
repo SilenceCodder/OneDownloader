@@ -1,12 +1,12 @@
 import 'package:onedownloader/utils/customFunction.dart';
-import 'package:onedownloader/viewmodel/base_model.dart';
+import 'package:stacked/stacked.dart';
 
-class DialogVieModel extends BaseModel {
+class DialogVieModel extends BaseViewModel {
   final CustomFunction _developerFunction = new CustomFunction();
 
   updateApp() {
     String url =
-        'https://play.google.com/store/apps/details?id=com.skitetech.nairaland';
+        'https://play.google.com/store/apps/details?id=com.skitetech.onedownloader';
     _developerFunction.launchURL(url);
   }
 }

@@ -3,6 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:onedownloader/model/Data.dart';
 import 'package:onedownloader/Styles/AppColor.dart';
 import 'package:onedownloader/Styles/AppTextStyle.dart';
+import 'package:onedownloader/screen/AboutDeveloper.dart';
+import 'package:onedownloader/screen/Ads/FullAdsScreen.dart';
+import 'package:onedownloader/screen/Facebook/FacebookScreen.dart';
+import 'package:onedownloader/screen/TitTok/tiktokDownloadScreen.dart';
+import 'package:onedownloader/screen/Youtube/MainYoutubeScreen.dart';
+import 'package:onedownloader/screen/instagram/mainInstragramScreen.dart';
+import 'package:onedownloader/screen/whatsapp/ShowsScreen.dart';
 
 class CategoryWidgets extends StatefulWidget {
   final AnimationController mainScreenAnimationController;
@@ -19,6 +26,7 @@ class CategoryWidgets extends StatefulWidget {
 class _CategoryWidgetsState extends State<CategoryWidgets>
     with TickerProviderStateMixin {
   AnimationController animationController;
+  
 
   @override
   void initState() {
@@ -59,6 +67,7 @@ class _CategoryWidgetsState extends State<CategoryWidgets>
                     id: index,
                     name: getCategoryList()[index].name,
                     icon: getCategoryList()[index].icon,
+                    iconColor: getCategoryList()[index].iconColor,
                     url: getCategoryList()[index].webUrl,
                     animation: animation,
                     color: getCategoryList()[index].color,
@@ -91,7 +100,7 @@ class CategoryView extends StatelessWidget {
   final bool changeColor;
   final String iconLink, name, url;
   final int id;
-  final Color color;
+  final Color color, iconColor;
   final IconData icon;
 
   const CategoryView({
@@ -101,6 +110,7 @@ class CategoryView extends StatelessWidget {
     this.name,
     this.url,
     this.color,
+    this.iconColor,
     this.icon,
     this.id,
     this.animation,
@@ -142,7 +152,7 @@ class CategoryView extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8.0),
                             child: Icon(
                               icon,
-                              color: Colors.white,
+                              color: iconColor,
                             ),
                           ),
                         ),
@@ -157,7 +167,7 @@ class CategoryView extends StatelessWidget {
                 ),
               ),
               onTap: () {
-              
+              whenIndexClicked(context);
               },
             ),
           ),
@@ -166,34 +176,28 @@ class CategoryView extends StatelessWidget {
     );
   }
 
-  // whenIndexClicked(BuildContext context) {
-  //   if (id == 0) {
-  //     //HOME
+  whenIndexClicked(BuildContext context) {
+    if (id == 0) { //Facebook
+      print('Here');
+      //FACEBOOK
+  Navigator.push(context, MaterialPageRoute(
+                builder: (context) => FullAdsScreen(pageTogo: FacebookScreen(),),));
+              
+  }else if(id == 1){ //Whatsapp
+      Navigator.push(context, MaterialPageRoute(
+                builder: (context) => ShowsScreen(title: 'Whatsapp Status', path: '',),));
 
-  //   } else if (id == 1) {
-  //     //FEATURED
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute(builder: (context) => FeaturedScreen()),
-  //     );
-  //   // } else if (id == 2) {
-  //   //   //TRENDING
-  //   //   Navigator.push(
-  //   //     context,
-  //   //     MaterialPageRoute(builder: (context) => TrendingScreen()),
-  //   //   );
-  //   // } else if (id == 3) {
-  //   //   //LATEST
-  //   //   Navigator.push(
-  //   //     context,
-  //   //     MaterialPageRoute(builder: (context) => LatestNewsScreen()),
-  //   //   );
-  //   } else if (id == 4) {
-  //     //Jobs
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute(builder: (context) => JobScreen()),
-  //     );
-  //   }
-  // }
+  }else if(id == 2){ //Instragm
+                 Navigator.push(context, MaterialPageRoute(
+                builder: (context) => FullAdsScreen(pageTogo: MainInstragramScreen(),),));
+
+  }else if(id == 3){ //TickTok
+  Navigator.push(context, MaterialPageRoute(
+                builder: (context) => FullAdsScreen(pageTogo: TiktokDownload(),),));
+
+  }else if(id == 4){ //Youtube
+//  Navigator.push(context, MaterialPageRoute(
+//                 builder: (context) => FullAdsScreen(pageTogo: MainYoutubeScreen(),),));
+  }
+}
 }

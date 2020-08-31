@@ -25,16 +25,14 @@ class API implements BaseApi {
   //***********API for fetching Slider Image at the Dashboard...
   @override
   Future<AdvertSliderModel> getAdvertImageData() async {
-    // headers['Accept'] = 'application/json';
-    // headers['Content-type'] = 'application/json';
-    var map = new Map<String, String>();
-    map['vendor_id'] = 'b56f167fbbeea57f17d577a70ee03d81468da2be';
-
+    headers['Accept'] = 'application/json';
+    headers['Content-type'] = 'application/json';
     try {
       var response = await http
-          .post(BaseUrl().adverts,
-              //headers: headers,
-              body: map)
+          .get(
+            BaseUrl().adverts,
+            headers: headers,
+          )
           .timeout(Duration(seconds: httpDuration));
       var convert = json.decode(response.body);
       if (convert.toString().isNotEmpty) {

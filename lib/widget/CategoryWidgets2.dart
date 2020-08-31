@@ -22,6 +22,7 @@ class CategoryWidgets2 extends StatefulWidget {
 class _CategoryWidgets2State extends State<CategoryWidgets2>
     with TickerProviderStateMixin {
   AnimationController animationController;
+  
 
   @override
   void initState() {
@@ -47,8 +48,7 @@ class _CategoryWidgets2State extends State<CategoryWidgets2>
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 itemCount: getCategoryList2().length,
-                padding:
-                    const EdgeInsets.only(top: 0, bottom: 0, right: 3, left: 3),
+                padding: const EdgeInsets.only(top: 0, bottom: 0, right: 3, left: 3),
                 itemBuilder: (context, index) {
                   var count = getCategoryList2().length;
                   var animation = Tween(begin: 0.0, end: 1.0).animate(
@@ -64,6 +64,7 @@ class _CategoryWidgets2State extends State<CategoryWidgets2>
                     animation: animation,
                     icon: getCategoryList2()[index].icon,
                     color: getCategoryList2()[index].color,
+                    iconColor: getCategoryList()[index].iconColor,
                     url: getCategoryList2()[index].webUrl,
                     animationController: animationController,
                   );
@@ -94,7 +95,7 @@ class CategoryView extends StatelessWidget {
   final bool changeColor;
   final String iconLink, name, url;
   final int id;
-  final Color color;
+  final Color color, iconColor;
   final IconData icon;
 
   const CategoryView({
@@ -103,6 +104,7 @@ class CategoryView extends StatelessWidget {
     this.iconLink,
     this.name,
     this.url,
+    this.iconColor,
     this.color,
     this.icon,
     this.id,
@@ -145,7 +147,7 @@ class CategoryView extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8.0),
                             child: Icon(
                               icon,
-                              color: Colors.white,
+                              color: iconColor,
                             ),
                           ),
                         ),
@@ -160,7 +162,7 @@ class CategoryView extends StatelessWidget {
                 ),
               ),
               onTap: () {
-               
+                whenIndexClicked(context);
               },
             ),
           ),
@@ -168,4 +170,8 @@ class CategoryView extends StatelessWidget {
       },
     );
   }
+   whenIndexClicked(BuildContext context) {
+      final CustomFunction _customFunction = locator<CustomFunction>();
+     _customFunction.toastMessage(message: 'Coming Soon!');
+}
 }

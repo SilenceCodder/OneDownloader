@@ -1,16 +1,19 @@
-import 'package:onedownloader/screen/AboutDeveloper.dart';
-import 'package:onedownloader/widget/CategoryWidgets3.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:onedownloader/locator.dart';
 import 'package:onedownloader/model/advertSliderModel.dart';
 import 'package:onedownloader/Service/Api.dart';
 import 'package:onedownloader/Styles/AppColor.dart';
 import 'package:onedownloader/Styles/AppText.dart';
+import 'package:onedownloader/service/push_Notification.dart';
 import 'package:onedownloader/widget/CategoryTextView.dart';
 import 'package:onedownloader/widget/CategoryWidgets.dart';
 import 'package:onedownloader/widget/CategoryWidgets2.dart';
 import 'package:onedownloader/widget/SliderImage.dart';
+import 'package:onedownloader/widget/UpdateAppDialog.dart';
+import 'package:firebase_in_app_messaging/firebase_in_app_messaging.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -27,11 +30,13 @@ class _DashboardScreenState extends State<DashboardScreen>
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String formattedDate;
   Future<AdvertSliderModel> _futueAdverImage;
+  final PushNotification _pushNotification = locator<PushNotification>();
 
   @override
   void initState() {
     _futueAdverImage = API().getAdvertImageData();
     todaysDate();
+    initialized();
     animationController =
         AnimationController(duration: Duration(milliseconds: 600), vsync: this);
     topBarAnimation = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
@@ -78,7 +83,7 @@ class _DashboardScreenState extends State<DashboardScreen>
     );
     listViews.add(
       CategorytitleView(
-        titleTxt: 'Services',
+        titleTxt: 'Apps',
         subTxt: '',
         animation: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: animationController,
@@ -99,38 +104,6 @@ class _DashboardScreenState extends State<DashboardScreen>
     );
 
     listViews.add(
-      CategorytitleView(
-        titleTxt: 'Others',
-        subTxt: '',
-        animation: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: animationController,
-            curve:
-                Interval((1 / count) * 1, 1.0, curve: Curves.fastOutSlowIn))),
-        animationController: animationController,
-      ),
-    );
-    listViews.add(
-      CategoryWidgets3(
-        mainScreenAnimation: Tween(begin: 0.0, end: 1.0).animate(
-            CurvedAnimation(
-                parent: animationController,
-                curve: Interval((1 / count) * 4, 1.0,
-                    curve: Curves.fastOutSlowIn))),
-        mainScreenAnimationController: animationController,
-      ),
-    );
-    listViews.add(
-      CategorytitleView(
-        titleTxt: 'Account',
-        subTxt: '',
-        animation: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: animationController,
-            curve:
-                Interval((1 / count) * 1, 1.0, curve: Curves.fastOutSlowIn))),
-        animationController: animationController,
-      ),
-    );
-    listViews.add(
       CategoryWidgets2(
         mainScreenAnimation: Tween(begin: 0.0, end: 1.0).animate(
             CurvedAnimation(
@@ -140,6 +113,27 @@ class _DashboardScreenState extends State<DashboardScreen>
         mainScreenAnimationController: animationController,
       ),
     );
+    // listViews.add(
+    //   CategorytitleView(
+    //     titleTxt: 'Account',
+    //     subTxt: '',
+    //     animation: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+    //         parent: animationController,
+    //         curve:
+    //             Interval((1 / count) * 1, 1.0, curve: Curves.fastOutSlowIn))),
+    //     animationController: animationController,
+    //   ),
+    // );
+    // listViews.add(
+    //   CategoryWidgets2(
+    //     mainScreenAnimation: Tween(begin: 0.0, end: 1.0).animate(
+    //         CurvedAnimation(
+    //             parent: animationController,
+    //             curve: Interval((1 / count) * 4, 1.0,
+    //                 curve: Curves.fastOutSlowIn))),
+    //     mainScreenAnimationController: animationController,
+    //   ),
+    // );
   }
 
   @override
@@ -293,4 +287,50 @@ class _DashboardScreenState extends State<DashboardScreen>
   void dispose() {
     super.dispose();
   }
+
+initialized() async {
+    await _pushNotification.initialise();
+    await getVersion();
+  }
+  
+getVersion() async {
+    //Fetch client token and store..
+    final RemoteConfig remoteConfig = await RemoteConfig.instance;
+    var result;
+
+    try {
+      remoteConfig.setConfigSettings(RemoteConfigSettings(debugMode: true));
+      await remoteConfig.fetch(expiration: const Duration(seconds: 10));
+      await remoteConfig.activateFetched();
+      var result = remoteConfig.getString('Onedownloder_version'); //Firebase config Name
+      print('Result is ${result.toString()}');
+
+      if (result.toString() == '1.0') {
+      } else {
+        updateDialog(context);
+      }
+    } on FetchThrottledException catch (exception) {
+      // Fetch throttled.
+      print(exception);
+    } catch (exception) {
+      print('Unable to fetch remote config. Cached or default values will be '
+          'used');
+    }
+    return result;
+  }
+
+  //UPDATE DIALOG
+  updateDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return UpdateAppDialog(
+              color: AppColor.rimary,
+              title: 'Update',
+              buttonText: 'OK',
+              subtitile:
+                  'A new version is available, update the app to enjoy more features');
+        });
+  }
+
 }

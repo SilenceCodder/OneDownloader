@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">NairaLand</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank f6300978111</string>
+<!--    Banner-->
+    <string name="bannerunit">ca-app-pub-9358031762630688/6742365182</string>
+    <string name="Interstitialunit">ca-app-pub-9358031762630688/9818463975</string>
+    <string name="appid">ca-app-pub-9358031762630688~4307773533</string>
+</resources>
