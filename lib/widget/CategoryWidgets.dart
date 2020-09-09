@@ -182,22 +182,26 @@ class CategoryView extends StatelessWidget {
       //FACEBOOK
   Navigator.push(context, MaterialPageRoute(
                 builder: (context) => FullAdsScreen(pageTogo: FacebookScreen(),),));
+                // Navigator.push(context, MaterialPageRoute(
+                // builder: (context) => FacebookScreen(),));
               
   }else if(id == 1){ //Whatsapp
-      Navigator.push(context, MaterialPageRoute(
-                builder: (context) => ShowsScreen(title: 'Whatsapp Status', path: '',),));
+                  Navigator.push(context, MaterialPageRoute(
+                builder: (context) => FullAdsScreen(pageTogo:ShowsScreen(title: 'Whatsapp Status', path: '',),)));
 
   }else if(id == 2){ //Instragm
                  Navigator.push(context, MaterialPageRoute(
                 builder: (context) => FullAdsScreen(pageTogo: MainInstragramScreen(),),));
+                
 
   }else if(id == 3){ //TickTok
   Navigator.push(context, MaterialPageRoute(
                 builder: (context) => FullAdsScreen(pageTogo: TiktokDownload(),),));
+                
 
   }else if(id == 4){ //Youtube
-//  Navigator.push(context, MaterialPageRoute(
-//                 builder: (context) => FullAdsScreen(pageTogo: MainYoutubeScreen(),),));
+ Navigator.push(context, MaterialPageRoute(
+                builder: (context) => FullAdsScreen(pageTogo: MainYoutubeScreen(),),));
   }
 }
 }

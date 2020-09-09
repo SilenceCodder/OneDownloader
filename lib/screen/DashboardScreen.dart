@@ -8,14 +8,19 @@ import 'package:onedownloader/Service/Api.dart';
 import 'package:onedownloader/Styles/AppColor.dart';
 import 'package:onedownloader/Styles/AppText.dart';
 import 'package:onedownloader/service/push_Notification.dart';
+import 'package:onedownloader/utils/customFunction.dart';
 import 'package:onedownloader/widget/CategoryTextView.dart';
 import 'package:onedownloader/widget/CategoryWidgets.dart';
 import 'package:onedownloader/widget/CategoryWidgets2.dart';
+import 'package:onedownloader/widget/CategoryWidgets3.dart';
 import 'package:onedownloader/widget/SliderImage.dart';
 import 'package:onedownloader/widget/UpdateAppDialog.dart';
-import 'package:firebase_in_app_messaging/firebase_in_app_messaging.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+//import 'package:firebase_in_app_messaging/firebase_in_app_messaging.dart';
 
 class DashboardScreen extends StatefulWidget {
+  final String advertType;
+  const DashboardScreen({this.advertType});
   @override
   _DashboardScreenState createState() => _DashboardScreenState();
 }
@@ -31,10 +36,12 @@ class _DashboardScreenState extends State<DashboardScreen>
   String formattedDate;
   Future<AdvertSliderModel> _futueAdverImage;
   final PushNotification _pushNotification = locator<PushNotification>();
+  var advertImage;
+  final CustomFunction _customFunction = locator<CustomFunction>();
 
   @override
   void initState() {
-    _futueAdverImage = API().getAdvertImageData();
+ //   _futueAdverImage = API().getAdvertImageData();
     todaysDate();
     initialized();
     animationController =
@@ -70,7 +77,6 @@ class _DashboardScreenState extends State<DashboardScreen>
 
   void addAllListData() {
     var count = 9;
-
     listViews.add(
       SliderImage(
         animation: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
@@ -78,7 +84,7 @@ class _DashboardScreenState extends State<DashboardScreen>
             curve:
                 Interval((1 / count) * 0, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: animationController,
-        futueAdverImage: _futueAdverImage,
+        futueAdverImage:  (widget.advertType != null ? null : _futueAdverImage),
       ),
     );
     listViews.add(
@@ -113,27 +119,27 @@ class _DashboardScreenState extends State<DashboardScreen>
         mainScreenAnimationController: animationController,
       ),
     );
-    // listViews.add(
-    //   CategorytitleView(
-    //     titleTxt: 'Account',
-    //     subTxt: '',
-    //     animation: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-    //         parent: animationController,
-    //         curve:
-    //             Interval((1 / count) * 1, 1.0, curve: Curves.fastOutSlowIn))),
-    //     animationController: animationController,
-    //   ),
-    // );
-    // listViews.add(
-    //   CategoryWidgets2(
-    //     mainScreenAnimation: Tween(begin: 0.0, end: 1.0).animate(
-    //         CurvedAnimation(
-    //             parent: animationController,
-    //             curve: Interval((1 / count) * 4, 1.0,
-    //                 curve: Curves.fastOutSlowIn))),
-    //     mainScreenAnimationController: animationController,
-    //   ),
-    // );
+    listViews.add(
+      CategorytitleView(
+        titleTxt: 'Others',
+        subTxt: '',
+        animation: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+            parent: animationController,
+            curve:
+                Interval((1 / count) * 1, 1.0, curve: Curves.fastOutSlowIn))),
+        animationController: animationController,
+      ),
+    );
+    listViews.add(
+      CategoryWidgets3(
+        mainScreenAnimation: Tween(begin: 0.0, end: 1.0).animate(
+            CurvedAnimation(
+                parent: animationController,
+                curve: Interval((1 / count) * 4, 1.0,
+                    curve: Curves.fastOutSlowIn))),
+        mainScreenAnimationController: animationController,
+      ),
+    );
   }
 
   @override
@@ -247,7 +253,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                             //     child: Row(
                             //       children: <Widget>[
                             //         Icon(
-                            //           Icons.info,
+                            //           Icons.update,
                             //           size: 30,
                             //           color: Colors.white,
                             //         ),
@@ -255,12 +261,8 @@ class _DashboardScreenState extends State<DashboardScreen>
                             //     ),
                             //   ),
                             //   onTap: () {
-                            //     print('Pressed');
-                            //     Navigator.push(
-                            //       context,
-                            //       MaterialPageRoute(
-                            //           builder: (context) => AboutDeveloper()),
-                            //     );
+                            //     updateDialog(context);
+                               
                             //   },
                             // ),
                           ],
@@ -288,8 +290,9 @@ class _DashboardScreenState extends State<DashboardScreen>
     super.dispose();
   }
 
+
 initialized() async {
-    await _pushNotification.initialise();
+   // await _pushNotification.initialise();
     await getVersion();
   }
   
@@ -303,7 +306,9 @@ getVersion() async {
       await remoteConfig.fetch(expiration: const Duration(seconds: 10));
       await remoteConfig.activateFetched();
       var result = remoteConfig.getString('Onedownloder_version'); //Firebase config Name
-      print('Result is ${result.toString()}');
+      // advertImage =  remoteConfig.getString('advertImage'); 
+      // print('Result is ${advertImage.toString()}');
+      // _customFunction.saveAdvertType(advertStatus: advertImage); // Advert Status....
 
       if (result.toString() == '1.0') {
       } else {
@@ -332,5 +337,6 @@ getVersion() async {
                   'A new version is available, update the app to enjoy more features');
         });
   }
+
 
 }

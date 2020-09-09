@@ -1,9 +1,11 @@
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:onedownloader/Styles/AppColor.dart';
+import 'package:onedownloader/constants.dart';
 import 'package:onedownloader/styles/AppFontSizes.dart';
 import 'package:onedownloader/styles/AppTextStyle.dart';
 import 'package:share/share.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -16,6 +18,13 @@ class CustomFunction {
     } else {
       throw 'Could not launch $link';
     }
+  }
+
+  saveAdvertType({String advertStatus, String banner, String interstitial})async{
+ SharedPreferences prefs = await SharedPreferences.getInstance();
+   prefs.setString(advertType, advertStatus);
+   prefs.setString(firebaseAdsBANNER, banner);
+   prefs.setString(firebaseAdsINTERSTITIAL, interstitial);
   }
 
 

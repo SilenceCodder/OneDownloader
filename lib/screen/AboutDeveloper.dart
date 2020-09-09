@@ -67,17 +67,20 @@ class _AboutDeveloperState extends State<AboutDeveloper> {
           alignment: Alignment.center,
           child: CircleAvatar(
             radius: MediaQuery.of(context).size.width / 8,
-            backgroundImage: AssetImage(AppImage.icode),
+            backgroundImage: AssetImage(AppImage.developer),
             backgroundColor: Colors.white,
           ),
         ),
         ListTile(
-          title: Text(
-            "Harbdollar",
-            textAlign: TextAlign.center,
-            style: GoogleFonts.anaheim(
-                textStyle:
-                    TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold)),
+          title: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "Olajire Abdullah",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.anaheim(
+                  textStyle:
+                      TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold)),
+            ),
           ),
           subtitle: Text(
             "Mobile Developer(Android/iOS), Digital Marketer and Entrepreneur",

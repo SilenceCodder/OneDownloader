@@ -18,6 +18,8 @@ class CategoryWidgets3 extends StatefulWidget {
   _CategoryWidgets3State createState() => _CategoryWidgets3State();
 }
 
+final CustomFunction _customFunction = locator<CustomFunction>();
+
 class _CategoryWidgets3State extends State<CategoryWidgets3>
     with TickerProviderStateMixin {
   AnimationController animationController;
@@ -40,14 +42,13 @@ class _CategoryWidgets3State extends State<CategoryWidgets3>
             transform: new Matrix4.translationValues(
                 0.0, 30 * (1.0 - widget.mainScreenAnimation.value), 0.0),
             child: Container(
-              height: MediaQuery.of(context).size.height / 8,
+              height: MediaQuery.of(context).size.height / 6,
               width: double.infinity,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 itemCount: getCategoryList3().length,
-                padding:
-                    const EdgeInsets.only(top: 0, bottom: 0, right: 3, left: 3),
+                padding: const EdgeInsets.only(top: 0, bottom: 0, right: 3, left: 3),
                 itemBuilder: (context, index) {
                   var count = getCategoryList3().length;
                   var animation = Tween(begin: 0.0, end: 1.0).animate(
@@ -62,8 +63,9 @@ class _CategoryWidgets3State extends State<CategoryWidgets3>
                     name: getCategoryList3()[index].name,
                     animation: animation,
                     icon: getCategoryList3()[index].icon,
-                    url: getCategoryList3()[index].webUrl,
                     color: getCategoryList3()[index].color,
+                    iconColor: getCategoryList3()[index].iconColor,
+                    url: getCategoryList3()[index].webUrl,
                     animationController: animationController,
                   );
                 },
@@ -93,7 +95,7 @@ class CategoryView extends StatelessWidget {
   final bool changeColor;
   final String iconLink, name, url;
   final int id;
-  final Color color;
+  final Color color, iconColor;
   final IconData icon;
 
   const CategoryView({
@@ -102,6 +104,7 @@ class CategoryView extends StatelessWidget {
     this.iconLink,
     this.name,
     this.url,
+    this.iconColor,
     this.color,
     this.icon,
     this.id,
@@ -144,7 +147,7 @@ class CategoryView extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8.0),
                             child: Icon(
                               icon,
-                              color: Colors.white,
+                              color: iconColor,
                             ),
                           ),
                         ),
@@ -159,7 +162,7 @@ class CategoryView extends StatelessWidget {
                 ),
               ),
               onTap: () {
-              
+                whenIndexClicked(context);
               },
             ),
           ),
@@ -167,4 +170,18 @@ class CategoryView extends StatelessWidget {
       },
     );
   }
+   whenIndexClicked(BuildContext context) {
+
+     if(id == 0){
+ String url =
+        'https://play.google.com/store/apps/details?id=com.skitetech.onedownloader';
+    _customFunction.launchURL(url);
+
+     }else if(id == 1){
+     Navigator.push(context, MaterialPageRoute(
+                builder: (context) => AboutDeveloper(),));
+      
+}
+   }
+
 }

@@ -6,6 +6,7 @@ import 'package:onedownloader/model/Data.dart';
 import 'package:onedownloader/Styles/AppColor.dart';
 import 'package:onedownloader/Styles/AppTextStyle.dart';
 import 'package:onedownloader/utils/customFunction.dart';
+import 'package:onedownloader/widget/UpdateAppDialog.dart';
 
 class CategoryWidgets2 extends StatefulWidget {
   final AnimationController mainScreenAnimationController;
@@ -18,7 +19,7 @@ class CategoryWidgets2 extends StatefulWidget {
   @override
   _CategoryWidgets2State createState() => _CategoryWidgets2State();
 }
-
+final CustomFunction _customFunction = locator<CustomFunction>();
 class _CategoryWidgets2State extends State<CategoryWidgets2>
     with TickerProviderStateMixin {
   AnimationController animationController;
@@ -171,7 +172,20 @@ class CategoryView extends StatelessWidget {
     );
   }
    whenIndexClicked(BuildContext context) {
-      final CustomFunction _customFunction = locator<CustomFunction>();
+     print(id);
+     if(id == 4){
+ String url =
+        'https://play.google.com/store/apps/details?id=com.skitetech.onedownloader';
+    _customFunction.launchURL(url);
+
+     }else if(id == 5){
+     Navigator.push(context, MaterialPageRoute(
+                builder: (context) => AboutDeveloper(),));
+     }else{
+final CustomFunction _customFunction = locator<CustomFunction>();
      _customFunction.toastMessage(message: 'Coming Soon!');
+     }
+      
 }
+
 }
