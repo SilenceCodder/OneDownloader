@@ -1,7 +1,7 @@
 <img src="screenshots/logo.jpeg"/>
 
 # 🔥🔥 Onedownloader [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)  [![Twitter Follow](https://img.shields.io/twitter/follow/SilenceCodder.svg?style=social)](https://twitter.com/SilenceCodder)
-Flutter representation of a Social App Concept i found on Uplabs.
+
 
 ## ✨ Requirements
 * Any Operating System (ie. MacOS X, Linux, Windows)
@@ -67,8 +67,3 @@ Star⭐ the repo if you like what you see😉.
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
