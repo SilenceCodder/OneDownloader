@@ -12,6 +12,22 @@ class AppColor {
   static Color assents = Color(0xFF2962ff);
   static const Color primaryColor = const Color(0xFF336d88);
   static const Color secondaryLightColor = const Color(0xFF810000);
+  static const Color b1 = Color(0xFF0d47a1);
+  static const Color b11 = Color(0xFF810000);
+  static const Color b2 = Color(0xFF151212); //
+  static const Color b21 = Color(0xFFb34f84);
+  static const Color b4 = Color(0xFF78a9ef); //
+  static const Color b41 = Color(0xFF363963);
+  static const Color b5 = Color(0xFFffc93c);
+  static const Color white = Colors.white;
+  
+  static const primaryGradient = const LinearGradient(
+    colors: const [b4, b41],
+    stops: const [0.0, 1.0],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
+
 }
 
 

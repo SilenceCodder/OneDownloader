@@ -5,6 +5,7 @@ import 'package:onedownloader/locator.dart';
 import 'package:onedownloader/model/Data.dart';
 import 'package:onedownloader/Styles/AppColor.dart';
 import 'package:onedownloader/Styles/AppTextStyle.dart';
+import 'package:onedownloader/screen/SendFeedbackScreen.dart';
 import 'package:onedownloader/utils/customFunction.dart';
 
 class CategoryWidgets3 extends StatefulWidget {
@@ -173,15 +174,30 @@ class CategoryView extends StatelessWidget {
    whenIndexClicked(BuildContext context) {
 
      if(id == 0){
- String url =
-        'https://play.google.com/store/apps/details?id=com.skitetech.onedownloader';
-    _customFunction.launchURL(url);
+       //SHARE
+       _customFunction.shareApp();
+ 
 
      }else if(id == 1){
-     Navigator.push(context, MaterialPageRoute(
+       //TODO FEEDBACK HERE.......
+       Navigator.push(context, MaterialPageRoute(
+                builder: (context) => SendFeedbackScreen(),));
+
+       }else if(id == 2){
+         //UPDATE APP HERE
+         String url =
+        'https://play.google.com/store/apps/details?id=com.skite.onedownloader';
+    _customFunction.launchURL(url);
+
+       }else if(id == 3){
+         //ABOUT DEVELOPER
+         Navigator.push(context, MaterialPageRoute(
                 builder: (context) => AboutDeveloper(),));
+   
       
 }
    }
+
+ 
 
 }

@@ -72,7 +72,11 @@ List<String> videoList =
                    context,
   PageRouteBuilder(
     transitionDuration: Duration(seconds: 1),
-    pageBuilder: (_, __, ___) => PlayStatusVideoFile(videoList[index], index.toString()),
+    pageBuilder: (_, __, ___) => PlayStatusVideoFile(
+      videoFile: videoList[index], 
+      indexHero: index.toString(),
+      isWhatsapp: true,
+    ),
   ),
 );
                             },

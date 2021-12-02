@@ -1,6 +1,7 @@
 class AppText{
-  static const String appName = "oneDownloader";
+  static const String appName = "OneDownloader";
   static const String appDes = '1 downloads for all social media';
+  static const String des = 'We love to hear bugs, adjustment, testimonies';
 
     //****DIRECTORY */
   static const String whatsAppPath = '/storage/emulated/0/WhatsApp/Media/.Statuses'; // => /storage/emulated/0/Xender/image

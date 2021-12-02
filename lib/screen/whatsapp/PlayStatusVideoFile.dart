@@ -13,9 +13,9 @@ import 'package:onedownloader/widget/StatusVideoWidget.dart';
 import 'package:video_player/video_player.dart';
 
 class PlayStatusVideoFile extends StatefulWidget {
-   final String videoFile,  indexHero;
+   final String videoFile,  indexHero; bool isWhatsapp;
 
-  PlayStatusVideoFile(this.videoFile, this.indexHero);
+  PlayStatusVideoFile({this.videoFile, this.indexHero, this.isWhatsapp});
   @override
   _PlayStatusVideoFileState createState() => _PlayStatusVideoFileState();
 }
@@ -58,7 +58,7 @@ class _PlayStatusVideoFileState extends State<PlayStatusVideoFile> {
                     child: StatusVideoWidget(
                   videoPlayerController: VideoPlayerController.file(File(widget.videoFile)), looping: true, videoSrc: widget.videoFile),
          ),
-      floatingActionButton: SpeedDial(
+      floatingActionButton: (widget.isWhatsapp  ? SpeedDial(
           // both default to 16
           marginRight: 18,
           marginBottom: 20,
@@ -92,7 +92,7 @@ class _PlayStatusVideoFileState extends State<PlayStatusVideoFile> {
               } 
             ),
           ],
-        ),
+        ) : Container())
     );
  
   }

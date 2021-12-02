@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:onedownloader/locator.dart';
 import 'package:onedownloader/model/Data.dart';
 import 'package:onedownloader/Styles/AppColor.dart';
 import 'package:onedownloader/Styles/AppTextStyle.dart';
@@ -7,9 +8,9 @@ import 'package:onedownloader/screen/AboutDeveloper.dart';
 import 'package:onedownloader/screen/Ads/FullAdsScreen.dart';
 import 'package:onedownloader/screen/Facebook/FacebookScreen.dart';
 import 'package:onedownloader/screen/TitTok/tiktokDownloadScreen.dart';
-import 'package:onedownloader/screen/Youtube/MainYoutubeScreen.dart';
 import 'package:onedownloader/screen/instagram/mainInstragramScreen.dart';
 import 'package:onedownloader/screen/whatsapp/ShowsScreen.dart';
+import 'package:onedownloader/utils/customFunction.dart';
 
 class CategoryWidgets extends StatefulWidget {
   final AnimationController mainScreenAnimationController;
@@ -72,6 +73,8 @@ class _CategoryWidgetsState extends State<CategoryWidgets>
                     animation: animation,
                     color: getCategoryList()[index].color,
                     animationController: animationController,
+                    isImage:getCategoryList()[index].isImage,
+                    image:getCategoryList()[index].image,
                   );
                 },
               ),
@@ -98,21 +101,24 @@ class CategoryView extends StatelessWidget {
   final AnimationController animationController;
   final Animation animation;
   final bool changeColor;
-  final String iconLink, name, url;
+  final String iconLink, name, url, image;
   final int id;
   final Color color, iconColor;
   final IconData icon;
+  final bool isImage;
 
   const CategoryView({
     Key key,
     this.animationController,
     this.iconLink,
     this.name,
+    this.image,
     this.url,
     this.color,
     this.iconColor,
     this.icon,
     this.id,
+    this.isImage,
     this.animation,
     this.changeColor,
   }) : super(key: key);
@@ -150,10 +156,10 @@ class CategoryView extends StatelessWidget {
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
-                            child: Icon(
+                            child: (isImage == null || !isImage ? Icon(
                               icon,
                               color: iconColor,
-                            ),
+                            ): Image.asset(image,) ),
                           ),
                         ),
                       ),
@@ -199,9 +205,9 @@ class CategoryView extends StatelessWidget {
                 builder: (context) => FullAdsScreen(pageTogo: TiktokDownload(),),));
                 
 
-  }else if(id == 4){ //Youtube
- Navigator.push(context, MaterialPageRoute(
-                builder: (context) => FullAdsScreen(pageTogo: MainYoutubeScreen(),),));
+  }else if(id == 4){ //Twitter
+  final CustomFunction _customFunction = locator<CustomFunction>();
+  _customFunction.toastMessage(message: 'Coming Soon!');
   }
 }
 }

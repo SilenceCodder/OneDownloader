@@ -234,7 +234,7 @@ class _DowloadFacebookState extends State<DowloadFacebook> {
                                           color: Theme.of(context).accentColor,
                                           onPressed: _hasAudio
                                               ? () async {
-                                                  _customFunction.toastMessage(message: "Added to Download");
+                                                  _customFunction.toastMessage(message: "Now Downloading....");
                                                   String downloadUrl = _fbProfile.postData.videoSdUrl;
                                                   String name = 'FB-${DateTime.now().year}${DateTime.now().month}${DateTime.now().day}${DateTime.now().hour}${DateTime.now().minute}${DateTime.now().second}${DateTime.now().millisecond}(Audio).mp3';
 
@@ -256,7 +256,7 @@ class _DowloadFacebookState extends State<DowloadFacebook> {
                                           padding: EdgeInsets.all(5.0),
                                           color: Theme.of(context).accentColor,
                                           onPressed: () async {
-                                            _customFunction.toastMessage(message: "Added to Download");
+                                            _customFunction.toastMessage(message: "Now Downloading....");
                                             String downloadUrl = _fbProfile.postData.videoHdUrl;
                                             String name = 'FB-${DateTime.now().year}${DateTime.now().month}${DateTime.now().day}${DateTime.now().hour}${DateTime.now().minute}${DateTime.now().second}${DateTime.now().millisecond}.mp4';
 
@@ -273,6 +273,7 @@ class _DowloadFacebookState extends State<DowloadFacebook> {
                                               showNotification: true,
                                               openFileFromNotification: true,
                                             );
+                                             setErrorMessage(message: "Downloading.. Check download status in Notification bar...", t: 1);
                                           },
                                         ),
                                       ),
@@ -342,7 +343,7 @@ class _DowloadFacebookState extends State<DowloadFacebook> {
    setErrorMessage({String message, int t}){
     setState(() {
       errorMessage = message;
-    t =type;
+     type = t;
     });
   }
 }

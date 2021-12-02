@@ -1,4 +1,3 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
@@ -7,8 +6,10 @@ import 'package:onedownloader/locator.dart';
 import 'package:onedownloader/Service/navigation_service.dart';
 import 'package:onedownloader/screen/Ads/FullAdsScreen.dart';
 import 'package:onedownloader/screen/DashboardScreen.dart';
-import 'package:onedownloader/screen/Splash.dart';
+import 'package:onedownloader/screen/SplashScreen.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:onedownloader/route.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,11 +18,23 @@ void main() async{
   // optional: set false to disable printing logs to console
       );
       SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  runApp(App());
+       SharedPreferences prefs = await SharedPreferences.getInstance();
+        var board = prefs.getString(onboard);
+
+    if(board == null){  
+    runApp(App(data: null,));
+    }else{
+    runApp(App(data: "0",));
+    }
+    
+
 }
 
 
 class App extends StatefulWidget {
+  final String data;
+  App({this.data});
+
   @override
   _AppState createState() => _AppState();
 }
@@ -33,13 +46,16 @@ class _AppState extends State<App> {
     super.initState();
     sendUssdRequest();
   }
+  
   @override
   Widget build(BuildContext context) {
       return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'OneDownloader',
         navigatorKey: locator<NavigationService>().navigationKey,
-        home: Splash());//FullAdsScreen(pageTogo: dashboardRoute,)); //DashboardScreen());
+        home: (widget.data == null ?  SplashScreen() : FullAdsScreen(pageTogo: DashboardScreen(),)),
+        onGenerateRoute: generateRoute,
+        );//SplashScreen());//FullAdsScreen(pageTogo: dashboardRoute,)); //DashboardScreen());
   }
 
 
@@ -47,13 +63,13 @@ class _AppState extends State<App> {
      var status = await Permission.storage.status;
                   if (!status.isGranted) {
                     await Permission.storage.request();
-                  }
+  }
  }
 }
 
 // ///******* REQUEST PERMISTION */
 // class MyApp extends StatefulWidget {
-//   @override
+//   @override 
 //   _MyAppState createState() => _MyAppState();
 // }
 

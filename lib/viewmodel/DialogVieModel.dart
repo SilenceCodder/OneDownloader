@@ -6,7 +6,7 @@ class DialogVieModel extends BaseViewModel {
 
   updateApp() {
     String url =
-        'https://play.google.com/store/apps/details?id=com.skitetech.onedownloader';
+        'https://play.google.com/store/apps/details?id=com.skite.onedownloader';
     _developerFunction.launchURL(url);
   }
 }

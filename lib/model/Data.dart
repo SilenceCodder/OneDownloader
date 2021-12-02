@@ -8,9 +8,9 @@ import 'package:onedownloader/Styles/AppImage.dart';
 
 List<SliderModel> getSliderImage() {
   List<SliderModel> getslider = [
-    SliderModel(image: AppImage.board2),
+   // SliderModel(image: AppImage.board2),
     SliderModel(image: AppImage.ads),
-    SliderModel(image: AppImage.board3),
+   SliderModel(image: AppImage.board4),
   ];
   return getslider;
 }
@@ -36,8 +36,9 @@ List<CategoryModel> getCategoryList() {
         iconColor: Colors.red,
         icon: FontAwesomeIcons.instagram),
         CategoryModel(
-        image: AppImage.svg1,
+        image: AppImage.tiktok,
         name: 'TicTok',
+        isImage: true,
          color: Colors.white,
         iconColor: Colors.red,
         icon: FontAwesomeIcons.instagram),
@@ -62,17 +63,18 @@ List<CategoryModel> getCategoryList2() {
     CategoryModel(
         image: AppImage.svg1,
         name: 'Pinterest',
-        color: Colors.white,
-        iconColor: Colors.red,
+          color: Colors.white,
+        iconColor: Colors.blue,
         icon: FontAwesomeIcons.pinterest,),
     CategoryModel(
         image: AppImage.svg1,
         name: 'LinkedIn',
-         color: Colors.white,
+           color: Colors.white,
         iconColor: Colors.blue,
-        icon: FontAwesomeIcons.linkedin),
+        icon: FontAwesomeIcons.linkedinIn),
     CategoryModel(
-        image: AppImage.svg1,
+        image: AppImage.likee,
+        isImage: true,
         name: 'Likee',
         color: Colors.white,
         iconColor: Colors.red,
@@ -86,16 +88,30 @@ List<CategoryModel> getCategoryList2() {
 
 List<CategoryModel> getCategoryList3() {
   List<CategoryModel> getCategory3 = [
+    CategoryModel(
+        image: AppImage.svg1,
+        name: 'Share App',
+         color: Colors.white,
+        iconColor: Colors.blue,
+        icon: Icons.share),
+
+        CategoryModel(
+        image: AppImage.svg1,
+        name: 'Feedback',
+         color: Colors.white,
+        iconColor: Colors.green,
+        icon: FontAwesomeIcons.replyAll),
+
    CategoryModel(
         image: AppImage.svg1,
         name: 'Update App',
          color: Colors.white,
-        iconColor: Colors.green,
-        icon: Icons.update),
+        iconColor: Colors.tealAccent,
+        icon: FontAwesomeIcons.googlePlay),
 
         CategoryModel(
         image: AppImage.svg1,
-        name: 'Developer',
+        name: 'About Developer',
          color: Colors.white,
         iconColor: Colors.red,
         icon: FontAwesomeIcons.dev),
@@ -107,7 +123,7 @@ List<LocalAdvert> getLocalAdvertList() {
   List<LocalAdvert>  getLocalAdvert = [
     LocalAdvert(
       id: "1",
-      image: AppImage.board3,
+      image:AppImage.hire,
       location: "https://wa.me/+2348185951999?text=Hi,%20Am%20%20messaging%20you%20from%20Nairaland%20App%20I%20need%20a%20Mobile%20Application%20Thanks",
       name: "Hire Mobile Developer",
       rate: "4"

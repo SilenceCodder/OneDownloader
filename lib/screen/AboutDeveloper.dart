@@ -1,3 +1,4 @@
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,10 +14,14 @@ class AboutDeveloper extends StatefulWidget {
 
 class _AboutDeveloperState extends State<AboutDeveloper> {
   final CustomFunction _customFunction = locator<CustomFunction>();
+  BannerAd _bannerAd;
 
   @override
   void initState() {
     super.initState();
+    FirebaseAdMob.instance.initialize(appId: AppText.appID);
+    _bannerAd = createBannerAd()..load();
+    _bannerAd.show();
   }
 
   @override
@@ -153,7 +158,7 @@ class _AboutDeveloperState extends State<AboutDeveloper> {
           padding: const EdgeInsets.only(top: 8.0),
           child: Text(
             title,
-            style: Theme.of(context).textTheme.title.copyWith(fontSize: 14.0),
+            style: Theme.of(context).textTheme.subtitle1.copyWith(fontSize: 14.0),
           ),
         )
       ],
@@ -163,5 +168,31 @@ class _AboutDeveloperState extends State<AboutDeveloper> {
   @override
   void dispose() {
     super.dispose();
+  }
+  
+BannerAd createBannerAd() {
+   MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+    nonPersonalizedAds: true, 
+     testDevices: <String>["C90313AF7806813367ABF0BBA5D00C05"],
+  );
+
+    return BannerAd(
+      adUnitId: AppText.bannerId,//BannerAd.testAdUnitId,
+      //TODO REMOVE TEST Ads when going to Live
+      // AppText.bannerId,
+      size: AdSize.banner,
+       targetingInfo: targetingInfo,
+      //targetingInfo: targetingInfo,
+      listener: (MobileAdEvent event) {
+        
+        if(event == MobileAdEvent.closed){
+     //_navigationService.navigateTowithoutBack(homePageRoute);
+
+        }else if(event == MobileAdEvent.failedToLoad){
+          //Relaod this page
+         //  _navigationService.navigateTowithoutBack(fullAdscreenRoute);
+        }
+      },
+    );
   }
 }

@@ -46,7 +46,7 @@ class _TiktokDownloadState extends State<TiktokDownload> {
         appBar: PreferredSize(
                  preferredSize: Size.fromHeight(100.0), 
                  child: _customFunction.screenAppBar(screenName: "Tiktok", context: context, 
-                 tab1name: "Downloader", tab2name: "Downloads"),
+                 tab1name: "Downloader", tab2name: "Downloads", value: 3),
          ),
         body: TabBarView(children: [
                    Padding(

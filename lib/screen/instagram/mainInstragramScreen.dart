@@ -40,7 +40,7 @@ class _MainInstragramScreenState extends State<MainInstragramScreen> { //
         appBar: PreferredSize(
                  preferredSize: Size.fromHeight(100.0), 
                  child: _customFunction.screenAppBar(screenName: "Instagram", context: context, 
-                 tab1name: "Downloader", tab2name: "Downloads"),
+                 tab1name: "Downloader", tab2name: "Downloads", value: 2),
          ),
         body: TabBarView(children: [
                    Padding(

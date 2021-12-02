@@ -31,8 +31,14 @@ InterstitialAd _interstitialAd;
   }
 
   InterstitialAd createInterstitialAd() {
-    return InterstitialAd(
-      adUnitId: InterstitialAd.testAdUnitId,
+     MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+    nonPersonalizedAds: true, 
+     testDevices: <String>["C90313AF7806813367ABF0BBA5D00C05"],
+  );
+
+    return InterstitialAd( //C90313AF7806813367ABF0BBA5D00C05
+      adUnitId: AppText.interstitialUnit,
+      targetingInfo: targetingInfo,
       //TODO REMOVE TEST Ads when going to Live
       //AppText.interstitialUnit,
       listener: (MobileAdEvent event) {

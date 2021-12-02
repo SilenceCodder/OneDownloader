@@ -1,86 +1,43 @@
 {
   "project_info": {
-    "project_number": "132421322161",
-    "firebase_url": "https://nairaland-forum-30cc0.firebaseio.com",
-    "project_id": "nairaland-forum-30cc0",
-    "storage_bucket": "nairaland-forum-30cc0.appspot.com"
+    "project_number": "116573653307",
+    "firebase_url": "https://onedownloader-4bf8d.firebaseio.com",
+    "project_id": "onedownloader-4bf8d",
+    "storage_bucket": "onedownloader-4bf8d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:132421322161:android:197d3e4baab4a138756990",
+        "mobilesdk_app_id": "1:116573653307:android:ef3fd7d261d688d20e0f1e",
         "android_client_info": {
-          "package_name": "com.hab.nairaland"
+          "package_name": "com.skite.onedownloader"
         }
       },
       "oauth_client": [
         {
-          "client_id": "132421322161-00ikkontbd8pcfpt21ig0clvc44sv9k1.apps.googleusercontent.com",
+          "client_id": "116573653307-dbk7vb8al4tgqg7ne38hftmcde17p3nn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.hab.nairaland",
+            "package_name": "com.skite.onedownloader",
             "certificate_hash": "e94c420f5cfc1630b3a1bc2613889ef809d0b9ab"
           }
         },
         {
-          "client_id": "132421322161-6tcglhl31s4ga5vt7navumm62ur27be5.apps.googleusercontent.com",
+          "client_id": "116573653307-o45o13h7v7k3ad8vaolsgdfsmccnnl6u.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDB1AIGXOeS1Ud_7rmATl2AOkHTP88wOnI"
+          "current_key": "AIzaSyAjRLzYx6WbzjiZiKRmNOQzHdguMH4lkIQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "132421322161-6tcglhl31s4ga5vt7navumm62ur27be5.apps.googleusercontent.com",
+              "client_id": "116573653307-o45o13h7v7k3ad8vaolsgdfsmccnnl6u.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "132421322161-fstivnn4lig7er3hadrjbkr3qe3cgrgb.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "cmd.dmdm.dd"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:132421322161:android:eabd7c2948254077756990",
-        "android_client_info": {
-          "package_name": "com.skitetech.onedownloader"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "132421322161-6tcglhl31s4ga5vt7navumm62ur27be5.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDB1AIGXOeS1Ud_7rmATl2AOkHTP88wOnI"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "132421322161-6tcglhl31s4ga5vt7navumm62ur27be5.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "132421322161-fstivnn4lig7er3hadrjbkr3qe3cgrgb.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "cmd.dmdm.dd"
-              }
             }
           ]
         }

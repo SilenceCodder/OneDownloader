@@ -1,8 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:onedownloader/locator.dart';
+import 'package:onedownloader/screen/whatsapp/PlayStatusVideoFile.dart';
+import 'package:onedownloader/styles/AppImage.dart';
 import 'package:onedownloader/styles/AppText.dart';
 import 'package:onedownloader/utils/customFunction.dart';
+import 'package:share/share.dart';
+import 'package:thumbnails/thumbnails.dart';
 
 class InstagramDownloads extends StatefulWidget {
    final Directory dir, thumbDir;
@@ -51,73 +55,103 @@ class _InstagramDownloadsState extends State<InstagramDownloads> {
     } else {
       var fileList = widget.dir.listSync();
       if (fileList.length > 0) {
-        return Container(
-          padding: EdgeInsets.only(bottom: 150.0),
-          margin: EdgeInsets.only(left: 8.0, right: 8.0),
-          child: GridView.builder(
-             padding:EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
-              physics: BouncingScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              itemCount: fileList.length,
-            itemBuilder: (context, index) {
-              File file = fileList[index];
-              if (_isImage[index] == false) {
-                String thumb = fileList[index].toString().replaceAll('File: \'/storage/emulated/0/${AppText.appName}/Instagram/', '');
-                thumb = thumb.substring(0, thumb.length - 4) + 'jpg';
-                var path = widget.thumbDir.path + '/' + thumb;
-                file = File(path);
-              }
-              return Column(
-                children: <Widget>[
-                  _isImage[index]
-                      ? Container(
-                          height: _customFunction.screenWidthSize(120, context),
-                          width: _customFunction.screenWidthSize(120, context),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                          child: Material(
-                             elevation: 8.0,
+        
+   if(!Directory("${widget.dir.path}").existsSync()) {
+     print(Directory("${widget.dir.path}").existsSync());
+      return Scaffold(
+        body: Container(
+          padding: EdgeInsets.only(bottom: 60.0),
+          child: Center(
+            child: Text("Path doesn't Exist ", style: TextStyle(
+              fontSize: 18.0
+            ),),
+          ),
+        ),
+      );
+    }else {
+          
+List<String> videoList =
+        widget.dir.listSync().map((item) => item.path).where((item) =>
+         item.endsWith(".mp4")).toList(growable: false);
+
+         if (videoList != null) {
+      if (videoList.length > 0) {
+        return Scaffold(
+                  body: Container(
+                     padding: EdgeInsets.only(bottom: 60.0),
+              child: GridView.builder(
+                      padding:
+                      EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
+                      physics: BouncingScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      itemCount: videoList.length,
+                      itemBuilder: (context, index){
+                      return Material(
+                          elevation: 8.0,
                           borderRadius: BorderRadius.all(Radius.circular(8)),
-                           child: Hero(
+                          child: InkWell(
+                            splashColor: Colors.green,
+                            highlightColor: Colors.green,
+                            onTap: () {
+                             
+                  Navigator.push(
+                   context,
+  PageRouteBuilder(
+    transitionDuration: Duration(seconds: 1),
+    pageBuilder: (_, __, ___) => PlayStatusVideoFile(
+      videoFile: videoList[index], 
+      indexHero: index.toString(),
+      isWhatsapp: false,
+    ),
+  ),
+);
+                            },
+                            child: FutureBuilder(
+                                  future: _getImage(videoList[index]),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState == ConnectionState.done) {
+                                      if (snapshot.hasData) {
+                                    return    Hero(
                               tag:  index.toString(),
                               transitionOnUserGestures: true,
                               child: Image.file(
-                               file,
+                                File(snapshot.data),
                                 fit: BoxFit.cover,
                               ),
-                            ) 
+                            );
+                                      } else {
+                                        return Center(child: CircularProgressIndicator());
+                                      }
+                                    } else {
+                                      return Hero(
+                                          tag: videoList[index],
+                                          child: Container(height: 280.0, child: Image.asset(AppImage.imageloadingGif)));
+                                    }
+                                  })
                           ),
-                        )
-                      :  GestureDetector(
-                                              child: Material(
-                               elevation: 8.0,
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                             child: Hero(
-                                tag:  index.toString(),
-                                transitionOnUserGestures: true,
-                                child: Image.file(
-                                 file,
-                                  fit: BoxFit.cover,
-                                ),
-                              ) 
-                            ),
-                            onTap: (){
-                              _customFunction.toastMessage(message: 'You can play this on your Video Player', );
-                            },
+                          
+                        );
+
+                      },
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 24.0,
+                        crossAxisSpacing: 24.0,
+                        childAspectRatio: 1.0,
                       ),
-                ],
-              );
-            },
-             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 24.0,
-              crossAxisSpacing: 24.0,
-              childAspectRatio: 1.0,
-                      ),
-          ),
+                    ),  
+                                  ),
         );
+      } else {
+        return Center(child: Text("Sorry, No Videos Found.", style: TextStyle(fontSize: 18.0)));
+      }
+    // } else {
+    //   return Center(child: CircularProgressIndicator());
+    // }
+
+    }
+  }
+  
       } else {
         return Scaffold(
           body: Center(
@@ -131,5 +165,16 @@ class _InstagramDownloadsState extends State<InstagramDownloads> {
         );
       }
     }
+  }
+  
+
+  _getImage(videoPathUrl) async {
+    //await Future.delayed(Duration(milliseconds: 500));
+    String thumb = await Thumbnails.getThumbnail(
+        videoFile: videoPathUrl,
+        imageType: ThumbFormat.PNG, //this image will store in created folderpath
+        quality: 10);
+
+    return thumb;
   }
 }

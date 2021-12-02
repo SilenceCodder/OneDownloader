@@ -275,7 +275,7 @@ class _DownloadTabState extends State<DownloadTab> {
                                     //****FINAL DOWNLOAD */
                                     GestureDetector(
                       onTap: () async{
-                        _customFunction.toastMessage(message: "Added to Download");
+                        _customFunction.toastMessage(message: "Now Downloading....");
                                           String downloadUrl = _ttProfile.videoData.videoWatermarkUrl;
                                           String name = 'TT-${DateTime.now().year}${DateTime.now().month}${DateTime.now().day}${DateTime.now().hour}${DateTime.now().minute}${DateTime.now().second}${DateTime.now().millisecond}.mp4';
 
@@ -344,7 +344,7 @@ class _DownloadTabState extends State<DownloadTab> {
   setErrorMessage({String message, int t}){
     setState(() {
       errorMessage = message;
-    t =type;
+     type = t;
     });
   }
 }

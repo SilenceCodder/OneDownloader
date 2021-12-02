@@ -1,7 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'dart:io';
 import 'package:onedownloader/locator.dart';
-import 'package:onedownloader/service/navigation_service.dart';
 import 'package:onedownloader/utils/customFunction.dart';
 
 class PushNotification{
@@ -10,6 +9,8 @@ class PushNotification{
   final CustomFunction _customFunction = locator<CustomFunction>();
 
   Future initialise()async{
+   // print('>>>>>>>>> Notification Initialized >>>>>>>>>');
+    
     if(Platform.isIOS){
       _fcm.requestNotificationPermissions(IosNotificationSettings());
     }
@@ -32,13 +33,15 @@ class PushNotification{
   void serialNavigation({Map<String, dynamic> message}){
     var notificationData = message['data'];
     var view = notificationData['view'];
+    print('Data =>> $notificationData View ==>>$view');
+
       if(view != null){
        _customFunction.launchURL(view);
           //  _navigationService.navigateTo(pushNotificationRoute);
         
       }else{
           //_navigationService.navigateTo(pushNotificationRoute);
-          _customFunction.launchURL(view);
+        //  _customFunction.launchURL(view);
       }
 
   }

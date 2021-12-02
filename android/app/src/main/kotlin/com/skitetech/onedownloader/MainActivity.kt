@@ -1,4 +1,4 @@
-package com.skitetech.onedownloader
+package com.skite.onedownloader
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -67,6 +67,8 @@ class _CategoryWidgets2State extends State<CategoryWidgets2>
                     color: getCategoryList2()[index].color,
                     iconColor: getCategoryList()[index].iconColor,
                     url: getCategoryList2()[index].webUrl,
+                     isImage:getCategoryList2()[index].isImage,
+                    image:getCategoryList2()[index].image,
                     animationController: animationController,
                   );
                 },
@@ -94,16 +96,19 @@ class CategoryView extends StatelessWidget {
   final AnimationController animationController;
   final Animation animation;
   final bool changeColor;
-  final String iconLink, name, url;
+  final String iconLink, name, url, image;
   final int id;
   final Color color, iconColor;
   final IconData icon;
+  final bool isImage;
 
   const CategoryView({
     Key key,
     this.animationController,
     this.iconLink,
     this.name,
+    this.isImage,
+    this.image,
     this.url,
     this.iconColor,
     this.color,
@@ -146,10 +151,10 @@ class CategoryView extends StatelessWidget {
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
-                            child: Icon(
+                            child:(isImage == null || !isImage ? Icon(
                               icon,
                               color: iconColor,
-                            ),
+                            ): Image.asset(image) ),
                           ),
                         ),
                       ),
@@ -175,7 +180,7 @@ class CategoryView extends StatelessWidget {
      print(id);
      if(id == 4){
  String url =
-        'https://play.google.com/store/apps/details?id=com.skitetech.onedownloader';
+        'https://play.google.com/store/apps/details?id=com.skite.onedownloader';
     _customFunction.launchURL(url);
 
      }else if(id == 5){

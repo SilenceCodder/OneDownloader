@@ -1,3 +1,4 @@
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -38,11 +39,15 @@ class _DashboardScreenState extends State<DashboardScreen>
   final PushNotification _pushNotification = locator<PushNotification>();
   var advertImage;
   final CustomFunction _customFunction = locator<CustomFunction>();
+   BannerAd _bannerAd;
 
   @override
   void initState() {
  //   _futueAdverImage = API().getAdvertImageData();
     todaysDate();
+     FirebaseAdMob.instance.initialize(appId: AppText.appID);
+    _bannerAd = createBannerAd()..load();
+    _bannerAd.show();
     initialized();
     animationController =
         AnimationController(duration: Duration(milliseconds: 600), vsync: this);
@@ -72,11 +77,18 @@ class _DashboardScreenState extends State<DashboardScreen>
         }
       }
     });
+
+     FirebaseAdMob.instance.initialize(appId: AppText.appID);
+    _bannerAd = createBannerAd()..load();
+    _bannerAd.show();
     super.initState();
   }
 
   void addAllListData() {
     var count = 9;
+    // listViews.add(
+    //   SizedBox(height: 10,)
+    // );
     listViews.add(
       SliderImage(
         animation: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
@@ -244,27 +256,32 @@ class _DashboardScreenState extends State<DashboardScreen>
                                     )),
                               ),
                             ),
-                            // GestureDetector(
-                            //   child: Padding(
-                            //     padding: const EdgeInsets.only(
-                            //       left: 8,
-                            //       right: 8,
-                            //     ),
-                            //     child: Row(
-                            //       children: <Widget>[
-                            //         Icon(
-                            //           Icons.update,
-                            //           size: 30,
-                            //           color: Colors.white,
-                            //         ),
-                            //       ],
-                            //     ),
-                            //   ),
-                            //   onTap: () {
-                            //     updateDialog(context);
+                            GestureDetector(
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 8,
+                                  right: 8,
+                                ),
+                                child: Row(
+                                  children: <Widget>[
+                                    Text((formattedDate == null ? '' : formattedDate),
+                                    textAlign: TextAlign.left,
+                                    style: GoogleFonts.alike(
+                                      textStyle: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        letterSpacing: 0.27,
+                                        color: Colors.white,
+                                      ),
+                                    )),
+                                  ],
+                                ),
+                              ),
+                              onTap: () {
+                                updateDialog(context);
                                
-                            //   },
-                            // ),
+                              },
+                            ),
                           ],
                         ),
                       )
@@ -287,12 +304,13 @@ class _DashboardScreenState extends State<DashboardScreen>
 
   @override
   void dispose() {
+    _bannerAd.dispose();
     super.dispose();
   }
 
 
 initialized() async {
-   // await _pushNotification.initialise();
+    await _pushNotification.initialise();
     await getVersion();
   }
   
@@ -333,9 +351,35 @@ getVersion() async {
               color: AppColor.rimary,
               title: 'Update',
               buttonText: 'OK',
-              subtitile:
-                  'A new version is available, update the app to enjoy more features');
+              subtitile: 'A new version is available, update the app to enjoy more features');
         });
+  }
+
+
+BannerAd createBannerAd() {
+   MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+    nonPersonalizedAds: true, 
+     testDevices: <String>["C90313AF7806813367ABF0BBA5D00C05"],
+  );
+
+    return BannerAd(
+      adUnitId: AppText.bannerId,//BannerAd.testAdUnitId,
+      //TODO REMOVE TEST Ads when going to Live
+      // AppText.bannerId,
+      size: AdSize.banner,
+       targetingInfo: targetingInfo,
+      //targetingInfo: targetingInfo,
+      listener: (MobileAdEvent event) {
+        
+        if(event == MobileAdEvent.closed){
+     //_navigationService.navigateTowithoutBack(homePageRoute);
+
+        }else if(event == MobileAdEvent.failedToLoad){
+          //Relaod this page
+         //  _navigationService.navigateTowithoutBack(fullAdscreenRoute);
+        }
+      },
+    );
   }
 
 

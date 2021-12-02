@@ -2,6 +2,10 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:onedownloader/Styles/AppColor.dart';
 import 'package:onedownloader/constants.dart';
+import 'package:onedownloader/screen/AboutDeveloper.dart';
+import 'package:onedownloader/screen/Facebook/FacebookHelp.dart';
+import 'package:onedownloader/screen/TitTok/TikTokHelp.dart';
+import 'package:onedownloader/screen/instagram/InstagramHelp.dart';
 import 'package:onedownloader/styles/AppFontSizes.dart';
 import 'package:onedownloader/styles/AppTextStyle.dart';
 import 'package:share/share.dart';
@@ -12,6 +16,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 //******** FOR DEVELOPER LOGICAL FUNCTION CREATED HIMSELF, */
 class CustomFunction {
+  
   launchURL(String link) async {
     if (await canLaunch(link)) {
       await launch(link);
@@ -53,7 +58,7 @@ double screenWidthSize(double size, BuildContext context) {
   return size * MediaQuery.of(context).size.width / 400.0;
 }
 
-Widget screenAppBar({String screenName, BuildContext context,String tab1name, String tab2name }) {
+Widget screenAppBar({String screenName, BuildContext context,String tab1name, String tab2name, int value}) {
   return AppBar(
                 backgroundColor: Colors.white,
                 elevation: 0,
@@ -68,10 +73,26 @@ Widget screenAppBar({String screenName, BuildContext context,String tab1name, St
                   GestureDetector(
                       child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Icon(FontAwesomeIcons.dev, size: 30, color:  AppColor.primaryLight,),
+                      child: Icon(FontAwesomeIcons.question, size: 30, color:  Colors.red,),
                     ),
                     onTap: (){
+                      if(value == 1){
+                         Navigator.push(context, MaterialPageRoute(
+                builder: (context) => FacebookHelp(),));
+                
+                      }else if(value  == 2){
+                        //Instrgram
+                         Navigator.push(context, MaterialPageRoute(
+                builder: (context) => InstagramHelp(),));
+
+                      }else if(value == 3){
+                        //TikTok
+                         Navigator.push(context, MaterialPageRoute(
+                builder: (context) => TikTokHelp(),));
+
+                      }
               //_navigationService.navigateTo(settingRoute);
+              
                     },
                   )
                 ],
@@ -139,5 +160,7 @@ errorUimessage({String errorMessage, int type, BuildContext context}){
   loader(){
     return SpinKitSquareCircle(color: AppColor.rimary, duration: new Duration(seconds: 1), );
   }
-
+shareApp()async{
+    Share.share('Hi, Download your social media video, photos and audio with one Click. just copy your link and paste it on this App. Download the App now $playstoreLink');
+  }
 }

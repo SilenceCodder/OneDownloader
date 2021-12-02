@@ -21,6 +21,7 @@ class _FacebookScreenState extends State<FacebookScreen> {
   @override
   void initState() {
     super.initState();
+    
     if (!dir.existsSync()) {
       dir.createSync(recursive: true);
     }
@@ -38,7 +39,7 @@ class _FacebookScreenState extends State<FacebookScreen> {
         appBar: PreferredSize(
                  preferredSize: Size.fromHeight(100.0), 
                  child: _customFunction.screenAppBar(screenName: "Facebook", context: context, 
-                 tab1name: "Downloader", tab2name: "Downloads"),
+                 tab1name: "Downloader", tab2name: "Downloads", value: 1),
          ),
         body: TabBarView(children: [
                    Padding(

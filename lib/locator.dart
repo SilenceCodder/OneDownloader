@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:onedownloader/Service/navigation_service.dart';
 import 'package:onedownloader/service/DynamicLinkService.dart';
+import 'package:onedownloader/service/FirestoreService.dart';
 import 'package:onedownloader/service/push_Notification.dart';
 import 'package:onedownloader/utils/customFunction.dart';
 
@@ -14,5 +15,6 @@ void setupLocator() {
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => CustomFunction());
   locator.registerLazySingleton(() => PushNotification());
-locator.registerLazySingleton(() => DynamicLinkService());
+  locator.registerLazySingleton(() => DynamicLinkService());
+  locator.registerLazySingleton(() => FirestoreService()); 
 }

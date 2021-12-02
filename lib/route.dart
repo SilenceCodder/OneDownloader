@@ -3,6 +3,7 @@ import 'package:onedownloader/constants.dart';
 import 'package:onedownloader/Screen/SplashScreen.dart';
 import 'package:onedownloader/screen/Ads/FullAdsScreen.dart';
 import 'package:onedownloader/screen/DashboardScreen.dart';
+import 'package:onedownloader/screen/SendFeedbackScreen.dart';
 
 import 'package:page_transition/page_transition.dart';
 
@@ -27,6 +28,12 @@ case dashboardRoute:
       return _getPageRoute(
         routeName: settings.name,
         viewToShow: FullAdsScreen(pageTogo: nextScreen,),
+      );
+
+      case sendFeedBackRoute:
+      return _getPageRoute(
+        routeName: settings.name,
+        viewToShow: SendFeedbackScreen()
       );
 
     default:

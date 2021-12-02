@@ -326,7 +326,8 @@ class _InstaDownloderState extends State<InstaDownloder> {
                                          //****FINAL DOWNLOAD */
                                     GestureDetector(
                       onTap: () async{
-                       _customFunction.toastMessage(message: "Added to Download");
+                       
+                       _customFunction.toastMessage(message: "Now Downloading....");
                                             String downloadUrl = _instaPost.childPostsCount == 1 ? _instaPost.videoUrl.length > 4 ? _instaPost.videoUrl : _instaPost.photoLargeUrl : _instaPost.childposts[index].videoUrl.length > 4 ? _instaPost.childposts[index].videoUrl : _instaPost.childposts[index].photoLargeUrl;
                                             String name = 'IG-${DateTime.now().year}${DateTime.now().month}${DateTime.now().day}${DateTime.now().hour}${DateTime.now().minute}${DateTime.now().second}${DateTime.now().millisecond}.${downloadUrl.toString().contains('jpg') ? 'jpg' : 'mp4'}';
                                             String thumbUrl = _instaPost.childPostsCount > 1 ? _instaPost.childposts[index].photoLargeUrl : _instaPost.photoLargeUrl;
@@ -343,6 +344,7 @@ class _InstaDownloderState extends State<InstaDownloder> {
                                               showNotification: true,
                                               openFileFromNotification: true,
                                             );
+                    setErrorMessage(message: "Downloading.. Check download status in Notification bar...", t: 1);
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(right: 10.0, left: 10.0 ),
@@ -427,7 +429,7 @@ class _InstaDownloderState extends State<InstaDownloder> {
                                          //****FINAL DOWNLOAD */
                                     GestureDetector(
                       onTap: () async{
-                       _customFunction.toastMessage(message: "Added to Download");
+                       _customFunction.toastMessage(message: "Now Downloading....");
                      String downloadUrl = _instaProfile.storyData[index].downloadUrl;
                                             String name = 'IG-${DateTime.now().year}${DateTime.now().month}${DateTime.now().day}${DateTime.now().hour}${DateTime.now().minute}${DateTime.now().second}${DateTime.now().millisecond}.${downloadUrl.toString().contains('jpg') ? 'jpg' : 'mp4'}';
                                             String thumbUrl = _instaProfile.storyData[index].storyThumbnail;
@@ -446,6 +448,7 @@ class _InstaDownloderState extends State<InstaDownloder> {
                                               showNotification: true,
                                               openFileFromNotification: true,
                                             );
+                     setErrorMessage(message: "Downloading.. Check download status in Notification bar...", t: 1);
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(right: 10.0, left: 10.0 ),
@@ -527,7 +530,7 @@ class _InstaDownloderState extends State<InstaDownloder> {
   setErrorMessage({String message, int t}){
     setState(() {
       errorMessage = message;
-    t =type;
+     type = t;
     });
   }
 
